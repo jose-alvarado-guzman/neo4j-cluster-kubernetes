@@ -1,0 +1,59 @@
+#!/bin/bash
+
+source generate_yaml_files.sh
+
+# Authentication Parameters
+export NEO4J_USER=neo4j
+export NEO4J_PASSWORD=s00pers3cret
+export NEO4J_AUTH=${NEO4J_USER}/${NEO4J_PASSWORD}
+
+# Neo4j General Parameters
+export AUTH_ENABLED=true
+export BACKUP_ENABLED=true
+export BACKUP_LISTEN_ADDRESS=:6362
+export HEAP_SIZE=1G
+export PAGECACHE_SIZE=2G
+export TX_STATE_MEMORY_ALLOCATION=ON_HEAP
+export DEFAULT_LISTEN_ADDRESS=0.0.0.0
+
+# Neo4j Connectors Parameters
+export BOLT_ENABLED=true
+export BOLT_TLS_LEVEL=DISABLED
+export BOLT_ADVERTISED_ADDRESS=:7687
+export BOLT_LISTEN_ADDRESS=:7687
+
+export HTTP_ENABLED=true
+export HTTP_ADVERTISED_ADDRESS=:7474
+export HTTP_LISTEN_ADDRESS=:7474
+
+export HTTPS_ENABLED=false
+export HTTPS_ADVERTISED_ADDRESS=:7473
+export HTTPS_LISTEN_ADDRESS=:7473
+
+# Neo4j SSL Parameters
+export SSL_POLICY_BOLT_enabled=false
+export SSL_POLICY_BOLT_BASE_DIRECTORY=/var/lib/neo4j/certificates/bolt
+export SSL_POLICY_BOLT_PRIVATE_KEY=private_key
+export SSL_POLICY_BOLT_PUBLIC_CERTIFICATE=public_crt
+export SSL_POLICY_BOLT_CLIENT_AUTH=NONE
+export SSL_POLICY_BOLT_TRUST_ALL=true
+
+export SSL_POLICY_HTTPS_ENABLED=false
+export SSL_POLICY_HTTPS_BASE_DIRECTORY=/var/lib/neo4j/certificates/https
+export SSL_POLICY_HTTPS_PRIVATE_KEY=private_key
+export SSL_POLICY_HTTPS_PUBLIC_CERTIFICATE=public_crt
+export SSL_POLICY_HTTPS_CLIENT_AUTH=NONE
+export SSL_POLICY_HTTPS_TRUST_ALL=true
+
+# Cluster Configuration Parameters
+export MINIMUM_SIZE_AT_FORMATION=3
+export MINIMUM_SIZE_AT_RUNTIME=2
+export DISCOVERY_ADVERTISED_ADDRESS=:5000
+export TRANSACTION_ADVERTISED_ADDRESS=:6000
+export RAFT_ADVERTISED_ADDRESS=:7000
+export DISCOVERY_LISTEN_ADDRESS=:5000
+export TRANSACTION_LISTEN_ADDRESS=:6000
+export RAFT_LISTEN_ADDRESS=:7000
+export INITIAL_DISCOVERY_MEMBERS=${cluster_members}
+
+envsubst < configuration.template > configmap.yaml

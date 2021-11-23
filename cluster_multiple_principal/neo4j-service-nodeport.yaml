@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo4jdb-core-service
+spec:
+  selector:
+    app: neo4jdb
+    role: core
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 7474 # port used inside the cluster by the service, redirects to targetPort
+    targetPort: 7474 # actual container port where service is running 
+    nodePort: 30074 # external port mapped on host
+    name: neo4j-browser
+  - protocol: TCP
+    port: 7687 # port used inside the cluster by the service, redirects to targetPort
+    targetPort: 7687 # actual container port where service is running 
+    nodePort: 30087 # external port mapped on host
+    name: neo4j-bolt

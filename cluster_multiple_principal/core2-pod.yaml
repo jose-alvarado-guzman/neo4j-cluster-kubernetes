@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: neo4j-core2
+  labels:
+    app: neo4jdb
+    role: core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: neo4jdb
+      role: core
+  template:
+    metadata:
+      labels:
+        app: neo4jdb
+        role: core
+    spec:
+      hostname: neo4j-core2
+      subdomain: neo4jdb-cluster-service
+      containers:
+      - name: neo4j-core2
+        image: "neo4j:4.3.6-enterprise"
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+        ports:
+        - containerPort: 7474
+          name: browser
+        - containerPort: 7687
+          name: bolt
+        - containerPort: 5000
+          name: discovery
+        - containerPort: 6000
+          name: transaction
+        - containerPort: 7000
+          name: raft
+        envFrom:
+        - configMapRef:
+            name: neo4j-core2-configmap
+        - configMapRef:
+            name: neo4j-core-configmap

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo4jdb-cluster-service
+spec:
+  type: ClusterIP
+  selector:
+    app: neo4jdb
+    role: core
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+    name: neo4j-cluster-discovery
+  - protocol: TCP
+    port: 6000
+    targetPort: 6000
+    name: neo4j-cluster-transactions
+  - protocol: TCP
+    port: 7000
+    targetPort: 7000
+    name: neo4j-cluster-raft

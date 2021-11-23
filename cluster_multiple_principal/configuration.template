@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: neo4j-core-configmap
+  namespace: default
+data:
+  NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+  NEO4J_dbms_mode: "CORE"
+  NEO4J_AUTH: "${NEO4J_AUTH}"
+  NEO4J_dbms_security_auth__enabled: "${AUTH_ENABLED}"
+  NEO4J_dbms_backup_enabled: "${BACKUP_ENABLED}"
+  NEO4J_dbms_backup_listen__address: "${BACKUP_LISTEN_ADDRESS}"
+  NEO4J_dbms_memory_heap_initial__size: "${HEAP_SIZE}"
+  NEO4J_dbms_memory_heap_max__size: "${HEAP_SIZE}"
+  NEO4J_dbms_memory_pagecache_size: "${PAGECACHE_SIZE}"
+  NEO4J_dbms_tx__state_memory__allocation: "${TX_STATE_MEMORY_ALLOCATION}"
+  NEO4J_dbms_default__listen__address: "${DEFAULT_LISTEN_ADDRESS}"
+  NEO4J_dbms_connector_bolt_enabled: "${BOLT_ENABLED}"
+  NEO4J_dbms_connector_bolt_tls__level: "${BOLT_TLS_LEVEL}"
+  NEO4J_dbms_connector_bolt_advertised__address: "${BOLT_ADVERTISED_ADDRESS}"
+  NEO4J_dbms_connector_bolt_listen__address: "${BOLT_LISTEN_ADDRESS}"
+  NEO4J_dbms_connector_http_enabled: "${HTTP_ENABLED}"
+  NEO4J_dbms_connector_http_advertised__address: "${HTTP_ADVERTISED_ADDRESS}"
+  NEO4J_dbms_connector_http_listen__address: "${HTTP_LISTEN_ADDRESS}"
+  NEO4J_dbms_connector_https_enabled: "${HTTPS_ENABLED}"
+  NEO4J_dbms_connector_https_advertised__address: "${HTTPS_ADVERTISED_ADDRESS}"
+  NEO4J_dbms_connector_https_listen__address: "${HTTPS_LISTEN_ADDRESS}"
+  NEO4J_causal__clustering_minimum__core__cluster__size__at__formation: "${MINIMUM_SIZE_AT_FORMATION}"
+  NEO4J_causal__clustering_minimum__core__cluster__size__at__runtime: "${MINIMUM_SIZE_AT_RUNTIME}"
+  NEO4J_causal__clustering_discovery__advertised__address: "${DISCOVERY_ADVERTISED_ADDRESS}"
+  NEO4J_causal__clustering_transaction__advertised__address: "${TRANSACTION_ADVERTISED_ADDRESS}"
+  NEO4J_causal__clustering_raft__advertised__address: "${RAFT_ADVERTISED_ADDRESS}"
+  NEO4J_causal__clustering_discovery__listen__address: "${DISCOVERY_LISTEN_ADDRESS}"
+  NEO4J_causal__clustering_transaction__listen__address: "${TRANSACTION_LISTEN_ADDRESS}"
+  NEO4J_causal__clustering_raft__listen__address: "${RAFT_LISTEN_ADDRESS}"
+  NEO4J_causal__clustering_initial__discovery__members: "${INITIAL_DISCOVERY_MEMBERS}"
